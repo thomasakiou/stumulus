@@ -55,18 +55,15 @@ class _QuizOption1WidgetState extends State<QuizOption1Widget> {
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
         border: Border.all(
-          color: valueOrDefault<Color>(
-            () {
-              if (_model.isAnswered == true) {
-                return const Color(0xFF1A5C06);
-              } else if (_model.isAnswered == false) {
-                return const Color(0xFFFB0B0B);
-              } else {
-                return FlutterFlowTheme.of(context).secondaryBackground;
-              }
-            }(),
-            FlutterFlowTheme.of(context).secondaryBackground,
-          ),
+          color: () {
+            if (_model.isAnswered == true) {
+              return const Color(0xFF1A5C06);
+            } else if (_model.isAnswered == false) {
+              return const Color(0xFFFB0B0B);
+            } else {
+              return FlutterFlowTheme.of(context).primaryBackground;
+            }
+          }(),
           width: 1.0,
         ),
       ),
@@ -81,7 +78,7 @@ class _QuizOption1WidgetState extends State<QuizOption1Widget> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  color: FlutterFlowTheme.of(context).alternate,
                 ),
               ),
               alignment: const AlignmentDirectional(0.0, 0.0),

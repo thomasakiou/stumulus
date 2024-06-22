@@ -892,11 +892,6 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                               ],
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
-                                              border: Border.all(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                              ),
                                             ),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -915,11 +910,6 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               12.0),
-                                                      border: Border.all(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                      ),
                                                     ),
                                                     child: Padding(
                                                       padding:
