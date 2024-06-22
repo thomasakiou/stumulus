@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "790182096531",
+    "project_id": "quizapp-5566d",
+    "storage_bucket": "quizapp-5566d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790182096531:android:4b25d66296526800b96766",
+        "android_client_info": {
+          "package_name": "com.mycompany.stimulusquizapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnwi2l7GRvR4AL8Rffn63Ak3HSvSamoX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
