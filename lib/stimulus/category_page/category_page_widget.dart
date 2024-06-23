@@ -645,7 +645,7 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'My Quizes',
+                                  'Quizes',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -656,44 +656,6 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                         fontWeight: FontWeight.w600,
                                       ),
                                 ),
-                                if (valueOrDefault<bool>(
-                                    currentUserDocument?.isAdmin, false))
-                                  AuthUserStreamWidget(
-                                    builder: (context) => InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed('CreateQuizSet');
-                                      },
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            'Show all',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 12.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 12.0,
-                                          ),
-                                        ].divide(const SizedBox(width: 5.0)),
-                                      ),
-                                    ),
-                                  ),
                               ],
                             ).animateOnPageLoad(
                                 animationsMap['rowOnPageLoadAnimation']!),

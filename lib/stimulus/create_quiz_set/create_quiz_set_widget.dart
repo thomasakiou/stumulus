@@ -574,8 +574,9 @@ class _CreateQuizSetWidgetState extends State<CreateQuizSetWidget>
                             'WAEC',
                             'JAMB',
                             'NABTEB',
-                            'OTHERS',
-                            'GMAT'
+                            'SAT',
+                            'GMAT',
+                            'OTHERS'
                           ],
                           onChanged: (val) =>
                               setState(() => _model.dropDownValue = val),
