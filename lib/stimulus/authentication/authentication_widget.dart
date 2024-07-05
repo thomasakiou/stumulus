@@ -28,6 +28,8 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
     super.initState();
     _model = createModel(context, () => AuthenticationModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'Authentication'});
     if (!isWeb) {
       _keyboardVisibilitySubscription =
           KeyboardVisibilityController().onChange.listen((bool visible) {
@@ -376,6 +378,9 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                       0.0, 24.0, 0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'AUTHENTICATION_PAGE_LOGIN_BTN_ON_TAP');
+                                      logFirebaseEvent('Button_auth');
                                       GoRouter.of(context).prepareAuthEvent();
 
                                       final user =
@@ -710,6 +715,9 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                       0.0, 24.0, 0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'AUTHENTICATION_PAGE_REGISTER_BTN_ON_TAP');
+                                      logFirebaseEvent('Button_auth');
                                       GoRouter.of(context).prepareAuthEvent();
                                       if (_model.passwordTextController2.text !=
                                           _model.confirmPasswordTextController0
@@ -735,8 +743,13 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                         return;
                                       }
 
+                                      logFirebaseEvent(
+                                          'Button_update_app_state');
                                       FFAppState().create = 1;
                                       setState(() {});
+                                      logFirebaseEvent(
+                                          'Button_google_analytics_event');
+                                      logFirebaseEvent('SignUp');
 
                                       context.goNamedAuth(
                                           'HomePage', context.mounted);

@@ -31,8 +31,12 @@ class _AboutPageWidgetState extends State<AboutPageWidget>
     super.initState();
     _model = createModel(context, () => AboutPageModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'AboutPage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('ABOUT_PAGE_PAGE_AboutPage_ON_INIT_STATE');
+      logFirebaseEvent('AboutPage_ad_mob');
+
       admob.loadInterstitialAd(
         "",
         "ca-app-pub-1982424754845768/7245290305",
@@ -100,8 +104,14 @@ class _AboutPageWidgetState extends State<AboutPageWidget>
                           size: 24.0,
                         ),
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'ABOUT_keyboard_arrow_left_sharp_ICN_ON_T');
+                          logFirebaseEvent('IconButton_ad_mob');
+
                           _model.interstitialAdSuccess =
                               await admob.showInterstitialAd();
+
+                          logFirebaseEvent('IconButton_navigate_to');
 
                           context.pushNamed(
                             'HomePage',
@@ -525,6 +535,10 @@ class _AboutPageWidgetState extends State<AboutPageWidget>
                                 mouseCursor: SystemMouseCursors.click,
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () async {
+                                    logFirebaseEvent(
+                                        'ABOUT_RichTextSpan_zgxgsps9_ON_TAP');
+                                    logFirebaseEvent(
+                                        'RichTextSpan_bottom_sheet');
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,

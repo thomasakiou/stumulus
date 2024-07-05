@@ -39,14 +39,20 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
     super.initState();
     _model = createModel(context, () => CategoryPageModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CategoryPage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CATEGORY_CategoryPage_ON_INIT_STATE');
+      logFirebaseEvent('CategoryPage_ad_mob');
+
       admob.loadInterstitialAd(
         "",
         "ca-app-pub-1982424754845768/7245290305",
         false,
       );
 
+      logFirebaseEvent('CategoryPage_update_app_state');
       FFAppState().SearchActive = false;
       setState(() {});
     });
@@ -220,6 +226,10 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
               child: AuthUserStreamWidget(
                 builder: (context) => FloatingActionButton(
                   onPressed: () async {
+                    logFirebaseEvent(
+                        'CATEGORY_FloatingActionButton_num2w6mk_O');
+                    logFirebaseEvent('FloatingActionButton_navigate_to');
+
                     context.pushNamed('CreateQuizSet');
                   },
                   backgroundColor:
@@ -268,6 +278,10 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'CATEGORY_PAGE_PAGE_Row_v79d0vmg_ON_TAP');
+                            logFirebaseEvent('Row_navigate_to');
+
                             context.pushNamed('HomePage');
                           },
                           child: Row(
@@ -325,11 +339,17 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'CATEGORY_PAGE_PAGE_Row_w73vjz1j_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             admob.loadInterstitialAd(
                               "",
                               "ca-app-pub-1982424754845768/7245290305",
                               false,
                             );
+
+                            logFirebaseEvent('Row_navigate_to');
 
                             context.pushNamed('HomePage');
                           },
@@ -367,9 +387,14 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'CATEGORY_PAGE_PAGE_Row_phnk56iy_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             _model.interstitialAdSuccess =
                                 await admob.showInterstitialAd();
 
+                            logFirebaseEvent('Row_launch_u_r_l');
                             await launchURL(
                                 'https://sites.google.com/view/prothomsolutions/privacy?authuser=0');
 
@@ -409,9 +434,14 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'CATEGORY_PAGE_PAGE_Row_vdq3h643_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             _model.interstitialAdSuccess2 =
                                 await admob.showInterstitialAd();
 
+                            logFirebaseEvent('Row_launch_u_r_l');
                             await launchURL(
                                 'https://sites.google.com/view/prothomsolutions/contact?authuser=0');
 
@@ -451,12 +481,17 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'CATEGORY_PAGE_PAGE_Row_j3acww4p_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             admob.loadInterstitialAd(
                               "",
                               "ca-app-pub-1982424754845768/7245290305",
                               false,
                             );
 
+                            logFirebaseEvent('Row_auth');
                             GoRouter.of(context).prepareAuthEvent();
                             await authManager.signOut();
                             GoRouter.of(context).clearRedirectLocation();
@@ -498,13 +533,19 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'CATEGORY_PAGE_PAGE_Row_1uuo5mv1_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             admob.loadInterstitialAd(
                               "",
                               "ca-app-pub-1982424754845768/7245290305",
                               false,
                             );
 
+                            logFirebaseEvent('Row_auth');
                             await authManager.deleteUser(context);
+                            logFirebaseEvent('Row_navigate_to');
 
                             context.goNamed('Authentication');
                           },
@@ -545,6 +586,9 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
+                logFirebaseEvent('CATEGORY_PAGE_PAGE_Stack_61ruvmzw_ON_TAP');
+                logFirebaseEvent('Stack_ad_mob');
+
                 admob.loadInterstitialAd(
                   "",
                   "ca-app-pub-1982424754845768/7245290305",
@@ -581,6 +625,9 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      logFirebaseEvent(
+                                          'CATEGORY_PAGE_PAGE_Icon_24h7puv5_ON_TAP');
+                                      logFirebaseEvent('Icon_navigate_back');
                                       context.safePop();
                                     },
                                     child: Icon(
@@ -601,6 +648,10 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'CATEGORY_PAGE_PAGE_Icon_6aicpvqo_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Icon_set_dark_mode_settings');
                                           setDarkModeSetting(
                                               context, ThemeMode.light);
                                         },
@@ -622,6 +673,10 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'CATEGORY_PAGE_PAGE_Icon_dmm5w4jx_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Icon_set_dark_mode_settings');
                                             setDarkModeSetting(
                                                 context, ThemeMode.dark);
                                           },
@@ -672,6 +727,9 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                   '_model.textController',
                                   const Duration(milliseconds: 2000),
                                   () async {
+                                    logFirebaseEvent(
+                                        'CATEGORY_TextField_oynunucc_ON_TEXTFIELD');
+                                    logFirebaseEvent('TextField_simple_search');
                                     safeSetState(() {
                                       _model.simpleSearchResults = TextSearch(
                                         categoryPageQuizSetRecordList
@@ -689,6 +747,8 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                           .map((r) => r.object)
                                           .toList();
                                     });
+                                    logFirebaseEvent(
+                                        'TextField_update_app_state');
                                     FFAppState().SearchActive = true;
                                     setState(() {});
                                   },
@@ -750,6 +810,10 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                       ? InkWell(
                                           onTap: () async {
                                             _model.textController?.clear();
+                                            logFirebaseEvent(
+                                                'CATEGORY_TextField_oynunucc_ON_TEXTFIELD');
+                                            logFirebaseEvent(
+                                                'TextField_simple_search');
                                             safeSetState(() {
                                               _model.simpleSearchResults =
                                                   TextSearch(
@@ -768,6 +832,8 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                                       .map((r) => r.object)
                                                       .toList();
                                             });
+                                            logFirebaseEvent(
+                                                'TextField_update_app_state');
                                             FFAppState().SearchActive = true;
                                             setState(() {});
                                             setState(() {});
@@ -818,9 +884,14 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'CATEGORY_Container_g1wdr06f_ON_TAP');
                                             if (quizsetnosearchItem
                                                     .totalQuestions >
                                                 0) {
+                                              logFirebaseEvent(
+                                                  'Container_navigate_to');
+
                                               context.pushNamed(
                                                 'Description',
                                                 queryParameters: {
@@ -832,6 +903,9 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                                 }.withoutNulls,
                                               );
                                             } else {
+                                              logFirebaseEvent(
+                                                  'Container_navigate_to');
+
                                               context.pushNamed('HomePage');
                                             }
                                           },
@@ -1224,9 +1298,14 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'CATEGORY_Container_sdkoa39w_ON_TAP');
                                             if (quizsetnosearchItem
                                                     .totalQuestions >
                                                 0) {
+                                              logFirebaseEvent(
+                                                  'Container_navigate_to');
+
                                               context.pushNamed(
                                                 'Description',
                                                 queryParameters: {
@@ -1238,6 +1317,9 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                                 }.withoutNulls,
                                               );
                                             } else {
+                                              logFirebaseEvent(
+                                                  'Container_navigate_to');
+
                                               context.pushNamed('HomePage');
                                             }
                                           },
@@ -1644,9 +1726,14 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'CATEGORY_Container_afi6umyp_ON_TAP');
                                               if (noSearchNecoItem
                                                       .totalQuestions >
                                                   0) {
+                                                logFirebaseEvent(
+                                                    'Container_navigate_to');
+
                                                 context.pushNamed(
                                                   'Description',
                                                   queryParameters: {
@@ -1660,6 +1747,9 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                                   }.withoutNulls,
                                                 );
                                               } else {
+                                                logFirebaseEvent(
+                                                    'Container_navigate_to');
+
                                                 context.pushNamed('HomePage');
                                               }
                                             },
@@ -2068,9 +2158,14 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'CATEGORY_Container_ea4qarz9_ON_TAP');
                                               if (noSearchNecoItem
                                                       .totalQuestions >
                                                   0) {
+                                                logFirebaseEvent(
+                                                    'Container_navigate_to');
+
                                                 context.pushNamed(
                                                   'Description',
                                                   queryParameters: {
@@ -2084,6 +2179,9 @@ class _CategoryPageWidgetState extends State<CategoryPageWidget>
                                                   }.withoutNulls,
                                                 );
                                               } else {
+                                                logFirebaseEvent(
+                                                    'Container_navigate_to');
+
                                                 context.pushNamed('HomePage');
                                               }
                                             },

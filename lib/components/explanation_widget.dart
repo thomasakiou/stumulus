@@ -97,6 +97,9 @@ class _ExplanationWidgetState extends State<ExplanationWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'EXPLANATION_COMP_Image_sokg3c8n_ON_TAP');
+                          logFirebaseEvent('Image_expand_image');
                           await Navigator.push(
                             context,
                             PageTransition(
@@ -133,6 +136,8 @@ class _ExplanationWidgetState extends State<ExplanationWidget> {
                         const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent('EXPLANATION_COMP_DONE_BTN_ON_TAP');
+                        logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
                       },
                       text: 'Done',

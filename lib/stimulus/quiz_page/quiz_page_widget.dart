@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/explanation_widget.dart';
 import '/flutter_flow/flutter_flow_ad_banner.dart';
@@ -48,20 +47,27 @@ class _QuizPageWidgetState extends State<QuizPageWidget>
     super.initState();
     _model = createModel(context, () => QuizPageModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'QuizPage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('QUIZ_PAGE_PAGE_QuizPage_ON_INIT_STATE');
+      logFirebaseEvent('QuizPage_ad_mob');
+
       admob.loadInterstitialAd(
         "",
         "ca-app-pub-1982424754845768/7245290305",
         false,
       );
 
+      logFirebaseEvent('QuizPage_start_periodic_action');
       _model.instantTimer = InstantTimer.periodic(
         duration: const Duration(milliseconds: 1000),
         callback: (timer) async {
           if (FFAppState().clicked == 1) {
+            logFirebaseEvent('QuizPage_timer');
             _model.timerController.onStartTimer();
           } else {
+            logFirebaseEvent('QuizPage_timer');
             _model.timerController.onStopTimer();
           }
         },
@@ -199,6 +205,10 @@ class _QuizPageWidgetState extends State<QuizPageWidget>
                                       if (shouldUpdate) setState(() {});
                                     },
                                     onEnded: () async {
+                                      logFirebaseEvent(
+                                          'QUIZ_Timer_ucrru3fh_ON_TIMER_END');
+                                      logFirebaseEvent('Timer_navigate_to');
+
                                       context.goNamed('TimeUp');
                                     },
                                     textAlign: TextAlign.start,
@@ -272,8 +282,13 @@ class _QuizPageWidgetState extends State<QuizPageWidget>
                             size: 24.0,
                           ),
                           onPressed: () async {
+                            logFirebaseEvent('QUIZ_PAGE_PAGE_close_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_ad_mob');
+
                             _model.interstitialAdSuccess =
                                 await admob.showInterstitialAd();
+
+                            logFirebaseEvent('IconButton_navigate_to');
 
                             context.pushNamed(
                               'HomePage',
@@ -399,6 +414,10 @@ class _QuizPageWidgetState extends State<QuizPageWidget>
                                                                 0.0, 0.0),
                                                     child: FFButtonWidget(
                                                       onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'QUIZ_CLICK_FOR_EXPLANATION_BTN_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Button_bottom_sheet');
                                                         await showModalBottomSheet(
                                                           isScrollControlled:
                                                               true,
@@ -512,6 +531,10 @@ class _QuizPageWidgetState extends State<QuizPageWidget>
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'QUIZ_PAGE_PAGE_Image_t6hlnru8_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Image_expand_image');
                                                         await Navigator.push(
                                                           context,
                                                           PageTransition(
@@ -880,58 +903,57 @@ class _QuizPageWidgetState extends State<QuizPageWidget>
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  if ((FFAppState().completedQuestions >= 0) &&
-                                      (FFAppState().completedQuestions <
-                                          quizPageCount) &&
-                                      (valueOrDefault<bool>(
-                                              currentUserDocument?.isAdmin,
-                                              false) ==
-                                          true))
-                                    AuthUserStreamWidget(
-                                      builder: (context) =>
-                                          FlutterFlowIconButton(
-                                        borderColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                        borderRadius: 12.0,
-                                        buttonSize: 60.0,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        icon: Icon(
-                                          Icons.chevron_left,
-                                          color: FlutterFlowTheme.of(context)
-                                              .text1,
-                                          size: 30.0,
-                                        ),
-                                        onPressed: () async {
-                                          await _model.pageViewController
-                                              ?.previousPage(
-                                            duration:
-                                                const Duration(milliseconds: 300),
-                                            curve: Curves.ease,
-                                          );
-                                          _model.pageNavigation =
-                                              _model.pageNavigation + -1;
-                                          setState(() {});
-                                        },
-                                      ),
+                                  FlutterFlowIconButton(
+                                    borderColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: 12.0,
+                                    buttonSize: 60.0,
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    icon: Icon(
+                                      Icons.chevron_left,
+                                      color: FlutterFlowTheme.of(context).text1,
+                                      size: 30.0,
                                     ),
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'QUIZ_PAGE_PAGE_chevron_left_ICN_ON_TAP');
+                                      logFirebaseEvent('IconButton_page_view');
+                                      await _model.pageViewController
+                                          ?.previousPage(
+                                        duration: const Duration(milliseconds: 300),
+                                        curve: Curves.ease,
+                                      );
+                                      logFirebaseEvent(
+                                          'IconButton_update_page_state');
+                                      _model.pageNavigation =
+                                          _model.pageNavigation + -1;
+                                      setState(() {});
+                                    },
+                                  ),
                                   if ((FFAppState().completedQuestions >= 0) &&
                                       (FFAppState().completedQuestions <
                                           quizPageCount))
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'QUIZ_PAGE_PAGE_NEXT_BTN_ON_TAP');
+                                          logFirebaseEvent('Button_page_view');
                                           await _model.pageViewController
                                               ?.nextPage(
                                             duration:
                                                 const Duration(milliseconds: 300),
                                             curve: Curves.ease,
                                           );
+                                          logFirebaseEvent(
+                                              'Button_update_app_state');
                                           FFAppState().buttonState = 1;
                                           setState(() {});
                                           if (quizPageCount !=
                                               _model.pageNavigation) {
+                                            logFirebaseEvent(
+                                                'Button_update_page_state');
                                             _model.pageNavigation =
                                                 _model.pageNavigation + 1;
                                             setState(() {});
@@ -973,6 +995,11 @@ class _QuizPageWidgetState extends State<QuizPageWidget>
                                     Expanded(
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'QUIZ_PAGE_PAGE_COMPLETE_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_navigate_to');
+
                                           context.goNamed(
                                             'ScorePage',
                                             queryParameters: {
@@ -991,8 +1018,12 @@ class _QuizPageWidgetState extends State<QuizPageWidget>
                                             }.withoutNulls,
                                           );
 
+                                          logFirebaseEvent(
+                                              'Button_update_app_state');
                                           FFAppState().buttonState = 1;
                                           setState(() {});
+                                          logFirebaseEvent(
+                                              'Button_update_app_state');
                                           FFAppState().completedQuestions = 0;
                                           FFAppState().update(() {});
                                         },

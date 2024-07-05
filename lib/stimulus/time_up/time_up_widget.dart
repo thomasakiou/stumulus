@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/admob_util.dart' as admob;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:lottie/lottie.dart';
 import 'time_up_model.dart';
 export 'time_up_model.dart';
 
@@ -25,8 +26,12 @@ class _TimeUpWidgetState extends State<TimeUpWidget> {
     super.initState();
     _model = createModel(context, () => TimeUpModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'TimeUp'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('TIME_UP_PAGE_TimeUp_ON_INIT_STATE');
+      logFirebaseEvent('TimeUp_ad_mob');
+
       admob.loadInterstitialAd(
         "",
         "ca-app-pub-1982424754845768/7245290305",
@@ -63,14 +68,13 @@ class _TimeUpWidgetState extends State<TimeUpWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      'assets/images/pngwing.com_(27).png',
-                      width: 300.0,
-                      height: 200.0,
-                      fit: BoxFit.contain,
-                    ),
+                  Lottie.asset(
+                    'assets/lottie_animations/Animation_-_1720186013833.json',
+                    width: 150.0,
+                    height: 130.0,
+                    fit: BoxFit.cover,
+                    repeat: false,
+                    animate: true,
                   ),
                 ],
               ),
@@ -110,7 +114,7 @@ class _TimeUpWidgetState extends State<TimeUpWidget> {
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 20.0, 0.0, 0.0),
+                                0.0, 10.0, 0.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -136,8 +140,14 @@ class _TimeUpWidgetState extends State<TimeUpWidget> {
                                 30.0, 50.0, 30.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'TIME_UP_PAGE_START_AGAIN_BTN_ON_TAP');
+                                logFirebaseEvent('Button_ad_mob');
+
                                 _model.interstitialAdSuccess =
                                     await admob.showInterstitialAd();
+
+                                logFirebaseEvent('Button_navigate_to');
 
                                 context.pushNamed('HomePage');
 

@@ -30,6 +30,8 @@ class _NotificationWidgetState extends State<NotificationWidget>
     super.initState();
     _model = createModel(context, () => NotificationModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'Notification'});
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
@@ -94,6 +96,9 @@ class _NotificationWidgetState extends State<NotificationWidget>
                         size: 24.0,
                       ),
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'NOTIFICATION_keyboard_arrow_left_sharp_I');
+                        logFirebaseEvent('IconButton_navigate_back');
                         context.safePop();
                       },
                     ).animateOnPageLoad(
@@ -239,7 +244,11 @@ class _NotificationWidgetState extends State<NotificationWidget>
                           const EdgeInsetsDirectional.fromSTEB(20.0, 30.0, 20.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          logFirebaseEvent(
+                              'NOTIFICATION_SEND_NOTIFICATION_BTN_ON_TA');
+                          logFirebaseEvent('Button_firestore_query');
                           _model.users = await queryUsersRecordOnce();
+                          logFirebaseEvent('Button_trigger_push_notification');
                           triggerPushNotification(
                             notificationTitle: _model.textController1.text,
                             notificationText: _model.textController2.text,
@@ -249,6 +258,8 @@ class _NotificationWidgetState extends State<NotificationWidget>
                             initialPageName: 'HomePage',
                             parameterData: {},
                           );
+                          logFirebaseEvent(
+                              'Button_clear_text_fields_pin_codes');
                           setState(() {
                             _model.textController1?.clear();
                             _model.textController2?.clear();

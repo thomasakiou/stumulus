@@ -42,8 +42,12 @@ class _ScorePageWidgetState extends State<ScorePageWidget>
     super.initState();
     _model = createModel(context, () => ScorePageModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'ScorePage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SCORE_PAGE_PAGE_ScorePage_ON_INIT_STATE');
+      logFirebaseEvent('ScorePage_ad_mob');
+
       admob.loadInterstitialAd(
         "",
         "ca-app-pub-1982424754845768/7245290305",
@@ -83,7 +87,7 @@ class _ScorePageWidgetState extends State<ScorePageWidget>
           ),
         ],
       ),
-      'textOnPageLoadAnimation': AnimationInfo(
+      'textOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           FadeEffect(
@@ -121,21 +125,38 @@ class _ScorePageWidgetState extends State<ScorePageWidget>
           ),
         ],
       ),
-      'richTextOnPageLoadAnimation': AnimationInfo(
+      'textOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 50.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
           MoveEffect(
             curve: Curves.easeInOut,
-            delay: 50.0.ms,
-            duration: 600.0.ms,
-            begin: const Offset(0.0, 60.0),
+            delay: 1200.0.ms,
+            duration: 1860.0.ms,
+            begin: const Offset(0.0, 100.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 1200.0.ms,
+            duration: 1860.0.ms,
+            begin: const Offset(0.0, 100.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation4': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 1200.0.ms,
+            duration: 1860.0.ms,
+            begin: const Offset(0.0, 100.0),
             end: const Offset(0.0, 0.0),
           ),
         ],
@@ -213,8 +234,9 @@ class _ScorePageWidgetState extends State<ScorePageWidget>
                             size: 24.0,
                           ),
                           onPressed: () async {
-                            _model.interstitialAdSuccess =
-                                await admob.showInterstitialAd();
+                            logFirebaseEvent(
+                                'SCORE_PAGE_PAGE_close_ICN_ON_TAP');
+                            logFirebaseEvent('IconButton_navigate_to');
 
                             context.pushNamed(
                               'HomePage',
@@ -226,6 +248,11 @@ class _ScorePageWidgetState extends State<ScorePageWidget>
                                 ),
                               },
                             );
+
+                            logFirebaseEvent('IconButton_ad_mob');
+
+                            _model.interstitialAdSuccess =
+                                await admob.showInterstitialAd();
 
                             setState(() {});
                           },
@@ -239,10 +266,10 @@ class _ScorePageWidgetState extends State<ScorePageWidget>
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Lottie.network(
-                          'https://assets2.lottiefiles.com/packages/lf20_aZTdD5.json',
+                        Lottie.asset(
+                          'assets/lottie_animations/Animation_-_1720183495175.json',
                           width: 400.0,
-                          height: 300.0,
+                          height: 200.0,
                           fit: BoxFit.cover,
                           animate: true,
                         ),
@@ -264,19 +291,21 @@ class _ScorePageWidgetState extends State<ScorePageWidget>
                             animationsMap['rowOnPageLoadAnimation']!),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 10.0, 0.0, 0.0),
+                              0.0, 5.0, 0.0, 0.0),
                           child: Text(
-                            'You have completed the quiz',
+                            'On Completing the Quiz',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Readex Pro',
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 18.0,
                                   letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
                                 ),
                           ).animateOnPageLoad(
-                              animationsMap['textOnPageLoadAnimation']!),
+                              animationsMap['textOnPageLoadAnimation1']!),
                         ),
                       ],
                     ),
@@ -286,7 +315,7 @@ class _ScorePageWidgetState extends State<ScorePageWidget>
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
                     child: Container(
                       width: double.infinity,
-                      height: 100.0,
+                      height: 150.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).button1,
                         boxShadow: const [
@@ -373,54 +402,48 @@ class _ScorePageWidgetState extends State<ScorePageWidget>
                               ],
                             ),
                           ),
-                          RichText(
-                            textScaler: MediaQuery.of(context).textScaler,
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'You have got ',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                ),
-                                TextSpan(
-                                  text: valueOrDefault<String>(
-                                    ((widget.scoreAchieved!) * 10).toString(),
-                                    '0',
-                                  ),
-                                  style: GoogleFonts.getFont(
-                                    'Outfit',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14.0,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: ' points',
-                                  style: GoogleFonts.getFont(
-                                    'Outfit',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontSize: 14.0,
-                                  ),
-                                )
-                              ],
+                          if (widget.scoreAchieved! <
+                              (((widget.totalQuestions!) * 0.5).toInt()))
+                            Text(
+                              '\nYour score is below average, but with extra effort and dedication, you can improve and achieve your goals—keep studying hard!',
+                              textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                            ),
-                          ).animateOnPageLoad(
-                              animationsMap['richTextOnPageLoadAnimation']!),
+                            ).animateOnPageLoad(
+                                animationsMap['textOnPageLoadAnimation2']!),
+                          if ((widget.scoreAchieved! >=
+                                  (((widget.totalQuestions!) * 0.5).toInt())) &&
+                              (widget.scoreAchieved! < widget.totalQuestions!))
+                            Text(
+                              'Your above-average score shows great potential; keep studying and striving for even greater success!',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            ).animateOnPageLoad(
+                                animationsMap['textOnPageLoadAnimation3']!),
+                          if (widget.scoreAchieved == widget.totalQuestions)
+                            Text(
+                              'Your excellent score reflects your hard work and dedication; keep up the fantastic effort!',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            ).animateOnPageLoad(
+                                animationsMap['textOnPageLoadAnimation4']!),
                         ].divide(const SizedBox(height: 10.0)),
                       ),
                     ).animateOnPageLoad(

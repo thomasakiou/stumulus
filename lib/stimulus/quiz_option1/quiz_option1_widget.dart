@@ -51,7 +51,7 @@ class _QuizOption1WidgetState extends State<QuizOption1Widget> {
 
     return Container(
       width: double.infinity,
-      height: 75.0,
+      height: 70.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
         border: Border.all(
@@ -98,12 +98,20 @@ class _QuizOption1WidgetState extends State<QuizOption1Widget> {
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(),
-                child: Text(
-                  widget.questionName!,
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Readex Pro',
-                        letterSpacing: 0.0,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.questionName!,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
                       ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -151,44 +159,61 @@ class _QuizOption1WidgetState extends State<QuizOption1Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'QUIZ_OPTION1_Container_i9844mlw_ON_TAP');
                         if (widget.istrue!) {
                           if (_model.isAnswered != null) {
+                            logFirebaseEvent(
+                                'Container_update_component_state');
                             _model.disableButtons = 0;
                             _model.isAnswered = null;
                             setState(() {});
+                            logFirebaseEvent('Container_update_app_state');
                             FFAppState().completedQuestions =
                                 FFAppState().completedQuestions + 1;
                             setState(() {});
+                            logFirebaseEvent('Container_update_app_state');
                             FFAppState().score = FFAppState().score + -1;
                             setState(() {});
                           } else {
+                            logFirebaseEvent(
+                                'Container_update_component_state');
                             _model.disableButtons = 0;
                             _model.isAnswered = true;
                             setState(() {});
+                            logFirebaseEvent('Container_update_app_state');
                             FFAppState().completedQuestions =
                                 FFAppState().completedQuestions + 1;
                             setState(() {});
+                            logFirebaseEvent('Container_update_app_state');
                             FFAppState().score = FFAppState().score + 1;
                             setState(() {});
                           }
                         } else {
                           if (_model.isAnswered != null) {
+                            logFirebaseEvent(
+                                'Container_update_component_state');
                             _model.disableButtons = 0;
                             _model.isAnswered = null;
                             setState(() {});
+                            logFirebaseEvent('Container_update_app_state');
                             FFAppState().completedQuestions =
                                 FFAppState().completedQuestions + 1;
                             setState(() {});
                           } else {
+                            logFirebaseEvent(
+                                'Container_update_component_state');
                             _model.disableButtons = 0;
                             _model.isAnswered = false;
                             setState(() {});
+                            logFirebaseEvent('Container_update_app_state');
                             FFAppState().completedQuestions =
                                 FFAppState().completedQuestions + 1;
                             setState(() {});
                           }
                         }
 
+                        logFirebaseEvent('Container_update_app_state');
                         FFAppState().buttonState = 0;
                         setState(() {});
                       },

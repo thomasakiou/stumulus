@@ -33,14 +33,19 @@ class _HomePageWidgetState extends State<HomePageWidget>
     super.initState();
     _model = createModel(context, () => HomePageModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomePage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('HOME_PAGE_PAGE_HomePage_ON_INIT_STATE');
+      logFirebaseEvent('HomePage_ad_mob');
+
       admob.loadInterstitialAd(
         "",
         "ca-app-pub-1982424754845768/7245290305",
         false,
       );
 
+      logFirebaseEvent('HomePage_update_app_state');
       FFAppState().SearchActive = false;
       setState(() {});
     });
@@ -169,6 +174,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
               child: AuthUserStreamWidget(
                 builder: (context) => FloatingActionButton(
                   onPressed: () async {
+                    logFirebaseEvent(
+                        'HOME_FloatingActionButton_2hi9vlqr_ON_TA');
+                    logFirebaseEvent('FloatingActionButton_navigate_to');
+
                     context.pushNamed('CreateQuizSet');
                   },
                   backgroundColor:
@@ -217,6 +226,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'HOME_PAGE_PAGE_Row_wq7lqdg0_ON_TAP');
+                            logFirebaseEvent('Row_navigate_to');
+
                             context.pushNamed('HomePage');
                           },
                           child: Row(
@@ -274,11 +287,17 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'HOME_PAGE_PAGE_Row_ng4a6jbn_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             admob.loadInterstitialAd(
                               "",
                               "ca-app-pub-1982424754845768/7245290305",
                               false,
                             );
+
+                            logFirebaseEvent('Row_navigate_to');
 
                             context.pushNamed('HomePage');
                           },
@@ -316,9 +335,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'HOME_PAGE_PAGE_Row_goqye4nj_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             _model.interstitialAdSuccess =
                                 await admob.showInterstitialAd();
 
+                            logFirebaseEvent('Row_launch_u_r_l');
                             await launchURL(
                                 'https://sites.google.com/view/prothomsolutions/privacy?authuser=0');
 
@@ -358,9 +382,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'HOME_PAGE_PAGE_Row_eb09z7v8_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             _model.interstitialAdSuccess2 =
                                 await admob.showInterstitialAd();
 
+                            logFirebaseEvent('Row_launch_u_r_l');
                             await launchURL(
                                 'https://sites.google.com/view/prothomsolutions/contact?authuser=0');
 
@@ -400,12 +429,17 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'HOME_PAGE_PAGE_Row_qj2kxxpm_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             admob.loadInterstitialAd(
                               "",
                               "ca-app-pub-1982424754845768/7245290305",
                               false,
                             );
 
+                            logFirebaseEvent('Row_auth');
                             GoRouter.of(context).prepareAuthEvent();
                             await authManager.signOut();
                             GoRouter.of(context).clearRedirectLocation();
@@ -447,13 +481,19 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'HOME_PAGE_PAGE_Row_5z0zfczi_ON_TAP');
+                            logFirebaseEvent('Row_ad_mob');
+
                             admob.loadInterstitialAd(
                               "",
                               "ca-app-pub-1982424754845768/7245290305",
                               false,
                             );
 
+                            logFirebaseEvent('Row_auth');
                             await authManager.deleteUser(context);
+                            logFirebaseEvent('Row_navigate_to');
 
                             context.goNamed('Authentication');
                           },
@@ -494,6 +534,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
+                logFirebaseEvent('HOME_PAGE_PAGE_Stack_zrbta7vs_ON_TAP');
+                logFirebaseEvent('Stack_ad_mob');
+
                 admob.loadInterstitialAd(
                   "",
                   "ca-app-pub-1982424754845768/7245290305",
@@ -527,6 +570,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_PAGE_PAGE_Icon_i8v9sh7a_ON_TAP');
+                                    logFirebaseEvent('Icon_drawer');
                                     scaffoldKey.currentState!.openDrawer();
                                   },
                                   child: Icon(
@@ -547,6 +593,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
+                                        logFirebaseEvent(
+                                            'HOME_PAGE_PAGE_Icon_3jgwy9nk_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Icon_set_dark_mode_settings');
                                         setDarkModeSetting(
                                             context, ThemeMode.light);
                                       },
@@ -567,6 +617,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'HOME_PAGE_PAGE_Icon_jv0ebxji_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Icon_set_dark_mode_settings');
                                           setDarkModeSetting(
                                               context, ThemeMode.dark);
                                         },
@@ -597,6 +651,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           size: 24.0,
                                         ),
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'HOME_notification_add_ICN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'IconButton_navigate_to');
+
                                           context.pushNamed('Notification');
                                         },
                                       ),
@@ -653,6 +712,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_PAGE_PAGE_Container_om0b7a3b_ON_TAP');
+                                    logFirebaseEvent('Container_navigate_to');
+
                                     context.pushNamed(
                                       'CategoryPage',
                                       queryParameters: {
@@ -670,6 +733,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         ),
                                       },
                                     );
+
+                                    logFirebaseEvent(
+                                        'Container_google_analytics_event');
+                                    logFirebaseEvent('NECO');
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -716,6 +783,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_PAGE_PAGE_Container_uh557qzu_ON_TAP');
+                                    logFirebaseEvent('Container_navigate_to');
+
                                     context.pushNamed(
                                       'CategoryPage',
                                       queryParameters: {
@@ -733,6 +804,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         ),
                                       },
                                     );
+
+                                    logFirebaseEvent(
+                                        'Container_google_analytics_event');
+                                    logFirebaseEvent('WAEC');
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -779,6 +854,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_PAGE_PAGE_Container_wblfv4lx_ON_TAP');
+                                    logFirebaseEvent('Container_navigate_to');
+
                                     context.pushNamed(
                                       'CategoryPage',
                                       queryParameters: {
@@ -842,6 +921,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_PAGE_PAGE_Container_rzylv82n_ON_TAP');
+                                    logFirebaseEvent('Container_navigate_to');
+
                                     context.pushNamed(
                                       'CategoryPage',
                                       queryParameters: {
@@ -905,6 +988,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_PAGE_PAGE_Container_bo05x40g_ON_TAP');
+                                    logFirebaseEvent('Container_navigate_to');
+
                                     context.pushNamed(
                                       'CategoryPage',
                                       queryParameters: {
@@ -968,6 +1055,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_PAGE_PAGE_Container_dibel9sw_ON_TAP');
+                                    logFirebaseEvent('Container_navigate_to');
+
                                     context.pushNamed(
                                       'CategoryPage',
                                       queryParameters: {
@@ -1037,6 +1128,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_PAGE_PAGE_Container_ogyw54ab_ON_TAP');
+                                    logFirebaseEvent('Container_navigate_to');
+
                                     context.pushNamed(
                                       'CategoryPage',
                                       queryParameters: {
@@ -1054,6 +1149,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         ),
                                       },
                                     );
+
+                                    logFirebaseEvent(
+                                        'Container_google_analytics_event');
+                                    logFirebaseEvent('OTHERS');
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -1188,9 +1287,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'HOME_PAGE_PAGE_Container_t3l39ga2_ON_TAP');
                                               if (listViewQuizSetRecord
                                                       .totalQuestions >
                                                   0) {
+                                                logFirebaseEvent(
+                                                    'Container_navigate_to');
+
                                                 context.pushNamed(
                                                   'Description',
                                                   queryParameters: {

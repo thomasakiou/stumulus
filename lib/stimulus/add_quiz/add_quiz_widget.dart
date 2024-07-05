@@ -37,6 +37,7 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
     super.initState();
     _model = createModel(context, () => AddQuizModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'AddQuiz'});
     _model.imagesTextController ??= TextEditingController();
     _model.imagesFocusNode ??= FocusNode();
 
@@ -123,6 +124,9 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                             size: 24.0,
                           ),
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'ADD_QUIZ_keyboard_arrow_left_sharp_ICN_O');
+                            logFirebaseEvent('IconButton_navigate_back');
                             context.safePop();
                           },
                         ).animateOnPageLoad(
@@ -368,9 +372,17 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                                         setState(() =>
                                             _model.checkboxValue1 = newValue!);
                                         if (newValue!) {
+                                          logFirebaseEvent(
+                                              'ADD_QUIZ_Checkbox_5gcn6qgd_ON_TOGGLE_ON');
+                                          logFirebaseEvent(
+                                              'Checkbox_update_page_state');
                                           _model.optionA = true;
                                           setState(() {});
                                         } else {
+                                          logFirebaseEvent(
+                                              'ADD_QUIZ_Checkbox_5gcn6qgd_ON_TOGGLE_OFF');
+                                          logFirebaseEvent(
+                                              'Checkbox_update_page_state');
                                           _model.optionA = false;
                                           setState(() {});
                                         }
@@ -488,9 +500,17 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                                         setState(() =>
                                             _model.checkboxValue2 = newValue!);
                                         if (newValue!) {
+                                          logFirebaseEvent(
+                                              'ADD_QUIZ_Checkbox_xlc2x7gw_ON_TOGGLE_ON');
+                                          logFirebaseEvent(
+                                              'Checkbox_update_page_state');
                                           _model.optionB = true;
                                           setState(() {});
                                         } else {
+                                          logFirebaseEvent(
+                                              'ADD_QUIZ_Checkbox_xlc2x7gw_ON_TOGGLE_OFF');
+                                          logFirebaseEvent(
+                                              'Checkbox_update_page_state');
                                           _model.optionB = false;
                                           setState(() {});
                                         }
@@ -608,9 +628,17 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                                         setState(() =>
                                             _model.checkboxValue3 = newValue!);
                                         if (newValue!) {
+                                          logFirebaseEvent(
+                                              'ADD_QUIZ_Checkbox_eqruk97p_ON_TOGGLE_ON');
+                                          logFirebaseEvent(
+                                              'Checkbox_update_page_state');
                                           _model.optionC = true;
                                           setState(() {});
                                         } else {
+                                          logFirebaseEvent(
+                                              'ADD_QUIZ_Checkbox_eqruk97p_ON_TOGGLE_OFF');
+                                          logFirebaseEvent(
+                                              'Checkbox_update_page_state');
                                           _model.optionC = false;
                                           setState(() {});
                                         }
@@ -728,9 +756,17 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                                         setState(() =>
                                             _model.checkboxValue4 = newValue!);
                                         if (newValue!) {
+                                          logFirebaseEvent(
+                                              'ADD_QUIZ_Checkbox_hr12wj7f_ON_TOGGLE_ON');
+                                          logFirebaseEvent(
+                                              'Checkbox_update_page_state');
                                           _model.optionD = true;
                                           setState(() {});
                                         } else {
+                                          logFirebaseEvent(
+                                              'ADD_QUIZ_Checkbox_hr12wj7f_ON_TOGGLE_OFF');
+                                          logFirebaseEvent(
+                                              'Checkbox_update_page_state');
                                           _model.optionD = false;
                                           setState(() {});
                                         }
@@ -877,6 +913,10 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                         const EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 20.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        logFirebaseEvent(
+                            'ADD_QUIZ_PAGE_ADD_QUESTION_BTN_ON_TAP');
+                        logFirebaseEvent('Button_backend_call');
+
                         var quizRecordReference = QuizRecord.collection.doc();
                         await quizRecordReference.set(createQuizRecordData(
                           id: 1,
@@ -898,6 +938,7 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                                       _model.reviewImageTextController.text,
                                 ),
                                 quizRecordReference);
+                        logFirebaseEvent('Button_backend_call');
 
                         await QuestionARecord.createDoc(
                                 _model.quizCreateResponse!.reference)
@@ -905,6 +946,7 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                           question: _model.textController3.text,
                           isTrue: _model.optionA,
                         ));
+                        logFirebaseEvent('Button_backend_call');
 
                         await QuestionBRecord.createDoc(
                                 _model.quizCreateResponse!.reference)
@@ -912,6 +954,7 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                           question: _model.textController4.text,
                           isTrue: _model.optionB,
                         ));
+                        logFirebaseEvent('Button_backend_call');
 
                         await QuestionCRecord.createDoc(
                                 _model.quizCreateResponse!.reference)
@@ -919,6 +962,7 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                           question: _model.textController5.text,
                           isTrue: _model.optionC,
                         ));
+                        logFirebaseEvent('Button_backend_call');
 
                         await QuestionDRecord.createDoc(
                                 _model.quizCreateResponse!.reference)
@@ -926,6 +970,7 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                           question: _model.textController6.text,
                           isTrue: _model.optionD,
                         ));
+                        logFirebaseEvent('Button_backend_call');
 
                         await widget.quizset!.update({
                           ...mapToFirestore(
@@ -934,6 +979,7 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                             },
                           ),
                         });
+                        logFirebaseEvent('Button_clear_text_fields_pin_codes');
                         setState(() {
                           _model.imagesTextController?.clear();
                           _model.textController3?.clear();
@@ -944,6 +990,7 @@ class _AddQuizWidgetState extends State<AddQuizWidget>
                           _model.textController2?.clear();
                           _model.reviewImageTextController?.clear();
                         });
+                        logFirebaseEvent('Button_show_snack_bar');
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

@@ -38,14 +38,19 @@ class _DescriptionWidgetState extends State<DescriptionWidget>
     super.initState();
     _model = createModel(context, () => DescriptionModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Description'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('DESCRIPTION_Description_ON_INIT_STATE');
+      logFirebaseEvent('Description_ad_mob');
+
       admob.loadInterstitialAd(
         "",
         "ca-app-pub-1982424754845768/7245290305",
         false,
       );
 
+      logFirebaseEvent('Description_update_app_state');
       FFAppState().clicked = 0;
       setState(() {});
     });
@@ -80,6 +85,18 @@ class _DescriptionWidgetState extends State<DescriptionWidget>
             duration: 600.0.ms,
             begin: const Offset(0.0, 60.0),
             end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'buttonOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
           ),
         ],
       ),
@@ -155,9 +172,14 @@ class _DescriptionWidgetState extends State<DescriptionWidget>
                                 size: 24.0,
                               ),
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'DESCRIPTION_keyboard_arrow_left_sharp_IC');
+                                logFirebaseEvent('IconButton_ad_mob');
+
                                 _model.interstitialAdSuccess =
                                     await admob.showInterstitialAd();
 
+                                logFirebaseEvent('IconButton_navigate_back');
                                 context.safePop();
 
                                 setState(() {});
@@ -206,24 +228,10 @@ class _DescriptionWidgetState extends State<DescriptionWidget>
                             children: [
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 20.0, 0.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(
-                                    descriptionQuizSetRecord.coverPhoto,
-                                    width: 200.0,
-                                    height: 100.0,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 20.0, 10.0, 10.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -282,42 +290,103 @@ class _DescriptionWidgetState extends State<DescriptionWidget>
                                         ),
                                       ],
                                     ),
-                                    if (FFAppState().clicked == 0)
+                                  ],
+                                ),
+                              ),
+                              Align(
+                                alignment: const AlignmentDirectional(0.0, 1.0),
+                                child: FlutterFlowAdBanner(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height: 70.0,
+                                  showsTestAd: false,
+                                  androidAdUnitID:
+                                      'ca-app-pub-1982424754845768/9146563328',
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 10.0, 10.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        descriptionQuizSetRecord.description,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              fontSize: 15.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 20.0, 0.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'Quiz Mode is with timer while Practice mode is Without timer.',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              fontSize: 16.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            'Use Timer? ',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Outfit',
-                                                  fontSize: 16.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                          ),
                                           InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'DESCRIPTION_Container_n7i28nf5_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Container_update_app_state');
                                               FFAppState().clicked = 1;
                                               setState(() {});
                                             },
                                             child: Container(
-                                              width: 50.0,
-                                              height: 30.0,
+                                              width: 100.0,
+                                              height: 50.0,
                                               decoration: BoxDecoration(
                                                 color: const Color(0xFF07540C),
+                                                boxShadow: const [
+                                                  BoxShadow(
+                                                    blurRadius: 4.0,
+                                                    color: Color(0x33000000),
+                                                    offset: Offset(
+                                                      0.0,
+                                                      2.0,
+                                                    ),
+                                                  )
+                                                ],
                                                 borderRadius:
                                                     BorderRadius.circular(8.0),
                                               ),
                                               alignment: const AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Text(
-                                                'YES',
+                                                'Quiz \nMode',
                                                 textAlign: TextAlign.center,
                                                 style: FlutterFlowTheme.of(
                                                         context)
@@ -336,8 +405,74 @@ class _DescriptionWidgetState extends State<DescriptionWidget>
                                               ),
                                             ),
                                           ),
-                                        ],
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              logFirebaseEvent(
+                                                  'DESCRIPTION_Container_c444w8vz_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Container_update_app_state');
+                                              FFAppState().clicked = 2;
+                                              setState(() {});
+                                            },
+                                            child: Container(
+                                              width: 100.0,
+                                              height: 50.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                boxShadow: const [
+                                                  BoxShadow(
+                                                    blurRadius: 4.0,
+                                                    color: Color(0x33000000),
+                                                    offset: Offset(
+                                                      0.0,
+                                                      2.0,
+                                                    ),
+                                                  )
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                              alignment: const AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: Text(
+                                                'Practice \nMode',
+                                                textAlign: TextAlign.center,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .text1,
+                                                      fontSize: 16.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w900,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ].divide(const SizedBox(width: 15.0)),
                                       ),
+                                    ].divide(const SizedBox(height: 5.0)),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 10.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
                                     if (FFAppState().clicked == 1)
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -408,93 +543,67 @@ class _DescriptionWidgetState extends State<DescriptionWidget>
                                   ],
                                 ),
                               ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 1.0),
-                                child: FlutterFlowAdBanner(
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  height: 70.0,
-                                  showsTestAd: false,
-                                  androidAdUnitID:
-                                      'ca-app-pub-1982424754845768/9146563328',
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 10.0, 10.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        descriptionQuizSetRecord.description,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 15.0,
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ],
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            20.0, 20.0, 20.0, 0.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed(
-                              'QuizPage',
-                              queryParameters: {
-                                'quizSet': serializeParam(
-                                  descriptionQuizSetRecord.reference,
-                                  ParamType.DocumentReference,
-                                ),
-                                'quizDuration': serializeParam(
-                                  descriptionQuizSetRecord.duration,
-                                  ParamType.int,
-                                ),
-                              }.withoutNulls,
-                            );
+                      if ((FFAppState().clicked == 2) ||
+                          (FFAppState().clicked == 1))
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 20.0, 0.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              logFirebaseEvent(
+                                  'DESCRIPTION_PAGE_START_QUIZ_BTN_ON_TAP');
+                              logFirebaseEvent('Button_navigate_to');
 
-                            FFAppState().score = 0;
-                            FFAppState().completedQuestions = 0;
-                            setState(() {});
-                          },
-                          text: 'Start Quiz',
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 40.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                            elevation: 3.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
+                              context.pushNamed(
+                                'QuizPage',
+                                queryParameters: {
+                                  'quizSet': serializeParam(
+                                    descriptionQuizSetRecord.reference,
+                                    ParamType.DocumentReference,
+                                  ),
+                                  'quizDuration': serializeParam(
+                                    descriptionQuizSetRecord.duration,
+                                    ParamType.int,
+                                  ),
+                                }.withoutNulls,
+                              );
+
+                              logFirebaseEvent('Button_update_app_state');
+                              FFAppState().score = 0;
+                              FFAppState().completedQuestions = 0;
+                              setState(() {});
+                            },
+                            text: 'Start Quiz',
+                            options: FFButtonOptions(
+                              width: double.infinity,
+                              height: 40.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
+                          ).animateOnPageLoad(
+                              animationsMap['buttonOnPageLoadAnimation']!),
                         ),
-                      ),
                     ],
                   ),
                 ),

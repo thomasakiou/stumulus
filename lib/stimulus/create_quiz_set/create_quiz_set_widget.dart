@@ -33,6 +33,8 @@ class _CreateQuizSetWidgetState extends State<CreateQuizSetWidget>
     super.initState();
     _model = createModel(context, () => CreateQuizSetModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CreateQuizSet'});
     _model.imageurlTextController ??= TextEditingController();
     _model.imageurlFocusNode ??= FocusNode();
 
@@ -120,6 +122,10 @@ class _CreateQuizSetWidgetState extends State<CreateQuizSetWidget>
                               size: 24.0,
                             ),
                             onPressed: () async {
+                              logFirebaseEvent(
+                                  'CREATE_QUIZ_SET_keyboard_arrow_left_shar');
+                              logFirebaseEvent('IconButton_navigate_to');
+
                               context.pushNamed(
                                 'HomePage',
                                 extra: <String, dynamic>{
@@ -163,6 +169,10 @@ class _CreateQuizSetWidgetState extends State<CreateQuizSetWidget>
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'CREATE_QUIZ_SET_Container_hqbdijab_ON_TA');
+                            logFirebaseEvent(
+                                'Container_upload_media_to_firebase');
                             final selectedMedia =
                                 await selectMediaWithSourceBottomSheet(
                               context: context,
@@ -612,6 +622,10 @@ class _CreateQuizSetWidgetState extends State<CreateQuizSetWidget>
                             const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'CREATE_QUIZ_SET_CREATE_SET_BTN_ON_TAP');
+                            logFirebaseEvent('Button_backend_call');
+
                             await QuizSetRecord.collection
                                 .doc()
                                 .set(createQuizSetRecordData(
@@ -627,12 +641,14 @@ class _CreateQuizSetWidgetState extends State<CreateQuizSetWidget>
                                   categories: _model.dropDownValue,
                                   createdDate: getCurrentTimestamp,
                                 ));
+                            logFirebaseEvent('Button_reset_form_fields');
                             setState(() {
                               _model.imageurlTextController?.clear();
                               _model.textController2?.clear();
                               _model.textController3?.clear();
                               _model.textController4?.clear();
                             });
+                            logFirebaseEvent('Button_show_snack_bar');
                             ScaffoldMessenger.of(context).clearSnackBars();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -737,6 +753,10 @@ class _CreateQuizSetWidgetState extends State<CreateQuizSetWidget>
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'CREATE_QUIZ_SET_Container_oh1l7fg2_ON_TA');
+                              logFirebaseEvent('Container_navigate_to');
+
                               context.pushNamed(
                                 'AddQuiz',
                                 queryParameters: {
